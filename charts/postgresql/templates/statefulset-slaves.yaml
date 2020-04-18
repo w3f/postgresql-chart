@@ -116,6 +116,11 @@ spec:
           value: {{ template "postgresql.fullname" . }}
         - name: POSTGRES_MASTER_PORT_NUMBER
           value: {{ include "postgresql.port" . | quote }}
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: postgresql-password
+              name: postgresql-postgresql
         ports:
         - name: postgresql
           containerPort: {{ template "postgresql.port" . }}
